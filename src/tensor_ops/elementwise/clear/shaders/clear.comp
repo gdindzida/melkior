@@ -1,0 +1,21 @@
+#version 450
+
+// 1D workgroup: 256 threads per group
+layout(local_size_x = 256, local_size_y = 1, local_size_z = 1) in;
+
+// Output SSBO
+layout(set = 0, binding = 0, std430) buffer OutBuf {
+    uint outData[];
+};
+
+// Push constants: N and value
+layout(push_constant) uniform PC {
+    uint N;
+    uint value;
+} pc;
+
+void main() {
+    uint idx = gl_GlobalInvocationID.x;
+    if (idx >= pc.N) return;
+    outData[idx] = pc.value;
+}

@@ -33,7 +33,7 @@ int main() {
   vkCreateInstance(&ici, nullptr, &instance);
 
   // --- Physical device ---
-  uint32_t physCount = 0;
+  uint32_t physCount = 1;
   vkEnumeratePhysicalDevices(instance, &physCount, nullptr);
   assert(physCount > 0);
 
